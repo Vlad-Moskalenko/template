@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { ROUTES } from './routes.const';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoutes';
 
 import { Layout } from 'src/components';
 import {
@@ -28,15 +30,15 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.FAVORITES,
-        element: <FavoritesPage />,
+        element: <PrivateRoute redirectTo="/login" component={FavoritesPage} />,
       },
       {
         path: ROUTES.REGISTER,
-        element: <RegisterPage />,
+        element: <RestrictedRoute redirectTo="/favorites" component={RegisterPage} />,
       },
       {
         path: ROUTES.LOGIN,
-        element: <LoginPage />,
+        element: <RestrictedRoute redirectTo="/favorites" component={LoginPage} />,
       },
     ],
   },
