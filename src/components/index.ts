@@ -4,3 +4,4 @@ export {Navigation} from './Navigation/Navigation';
 export {AppBar} from './AppBar/AppBar';
 export {UserMenu} from './UserMenu/UserMenu';
 export {AuthNav} from './AuthNav/AuthNav';
+export {LoginForm} from './LoginForm/LoginForm';

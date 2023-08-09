@@ -3,8 +3,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {login, register, refresh, logout} from './authOperations'
 
 export type User = {
+  name?: string | null,
   email: string | null,
-  name: string | null,
 }
 
 export type AuthState = {
@@ -14,7 +14,7 @@ export type AuthState = {
   isRefreshing: boolean
 }
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   user: {
     name: null,
     email: null

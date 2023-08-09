@@ -1,11 +1,14 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { AppBar } from '..';
+import { AppBar, Spinner } from '..';
 
 export const Layout = () => {
   return (
     <>
       <AppBar />
-      <Outlet />
+      <Suspense fallback={<Spinner />}>
+        <Outlet />
+      </Suspense>
       <footer>footer</footer>
     </>
   );
