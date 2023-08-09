@@ -9,7 +9,6 @@ export const Layout = () => {
       <Suspense fallback={<Spinner />}>
         <Outlet />
       </Suspense>
-      <footer>footer</footer>
     </>
   );
 };
