@@ -7,4 +7,5 @@ export const ROUTES: Routes = {
   DETAILS: '/details/:id',
   LOGIN: '/login',
   REGISTER: '/register',
+  FAVORITES: '/favorites',
 }

@@ -2,10 +2,15 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ROUTES } from './routes.const';
 
-import { Layout } from '../components';
-import HomePage from '../pages/HomePage';
-import ErrorPage from '../pages/ErrorPage';
-import DetailsPage from '../pages/DetailsPage';
+import { Layout } from 'src/components';
+import {
+  HomePage,
+  ErrorPage,
+  DetailsPage,
+  FavoritesPage,
+  LoginPage,
+  RegisterPage,
+} from 'src/pages';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +25,18 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.DETAILS,
         element: <DetailsPage />,
+      },
+      {
+        path: ROUTES.FAVORITES,
+        element: <FavoritesPage />,
+      },
+      {
+        path: ROUTES.REGISTER,
+        element: <RegisterPage />,
+      },
+      {
+        path: ROUTES.LOGIN,
+        element: <LoginPage />,
       },
     ],
   },
