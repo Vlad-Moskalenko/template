@@ -8,6 +8,6 @@ export const galleryInstance = axios.create({
   baseURL: 'https://api.unsplash.com/',
   params: {
     client_id: 'RettGyNtRcGqCERFzZOsyzJBIV7ZE_7YeW-8H6ix8B0',
-    per_page: 10,
+    per_page: 3,
   },
 });

@@ -10,7 +10,7 @@ export const Item = ({ data }: ItemProps) => {
 
   return (
     <li>
-      <Link to={`/photos/${id}`}>
+      <Link to={`/details/${id}`}>
         <img id={id} loading="lazy" src={urls.small} alt={alt_description} />
       </Link>
     </li>

@@ -1,3 +1,5 @@
+import s from './Spinner.module.css';
+
 export const Spinner = () => {
-  return <div>Loading...</div>;
+  return <div className={s.spinner}>Loading...</div>;
 };
