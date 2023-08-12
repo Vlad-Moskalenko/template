@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { User } from './authSlice';
-import { axiosInstance } from '../../services/axiosConsfig';
+import { authInstance } from '../../services/axiosConfig';
 
 interface RootState {
   auth: {
@@ -10,17 +10,17 @@ interface RootState {
 
 const token = {
   set(token:string | null):void {
-    axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    authInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
 
   unset():void{
-    axiosInstance.defaults.headers.common.Authorization = '';
+    authInstance.defaults.headers.common.Authorization = '';
   }
 }
 
 const register = createAsyncThunk('auth/signUp', async (userData: User, thunkApi) => {
   try{
-    const {data} = await axiosInstance.post('/users/signup', userData)
+    const {data} = await authInstance.post('/users/signup', userData)
     token.set(data.token)
     return data
   }
@@ -31,7 +31,7 @@ const register = createAsyncThunk('auth/signUp', async (userData: User, thunkApi
 
 const login = createAsyncThunk('auth/login', async (userData: User, thunkApi) => {
   try{
-    const {data} = await axiosInstance.post('/users/login', userData)
+    const {data} = await authInstance.post('/users/login', userData)
     token.set(data.token)
     return data
   }
@@ -42,7 +42,7 @@ const login = createAsyncThunk('auth/login', async (userData: User, thunkApi) =>
 
 const logout = createAsyncThunk('auth/logout', async (_, thunkApi) => {
   try{
-    await axiosInstance.post('/users/logout')
+    await authInstance.post('/users/logout')
     token.unset()
   }
   catch(err){
@@ -60,7 +60,7 @@ const refresh = createAsyncThunk('auth/refresh', async (_, thunkApi) => {
 
   try{
     token.set(persistedToken)
-    const {data} = await axiosInstance.get('/users/current')
+    const {data} = await authInstance.get('/users/current')
     return data
   }
   catch(err){

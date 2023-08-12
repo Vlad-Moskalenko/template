@@ -6,4 +6,6 @@ export {UserMenu} from './UserMenu/UserMenu';
 export {AuthNav} from './AuthNav/AuthNav';
 export {LoginForm} from './LoginForm/LoginForm';
 export {RegisterForm} from './RegisterForm/RegisterForm';
+export {List} from './List/List';
+export {Item} from './Item/Item'
 export {App} from './App';

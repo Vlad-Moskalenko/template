@@ -12,7 +12,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(refresh());
-  });
+  }, [dispatch]);
 
   return isRefreshing ? (
     <b>Refreshing user...</b>

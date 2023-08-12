@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {
   persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -9,19 +8,14 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 
 import { authReducer } from './auth/authSlice';
-
-const authPersistConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token'],
-};
+import { galleryReducer } from './gallery/gallerySlice';
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authPersistConfig, authReducer),
+    auth: authReducer,
+    gallery: galleryReducer
   },
 
   middleware: getDefaultMiddleware =>
