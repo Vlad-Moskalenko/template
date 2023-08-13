@@ -2,17 +2,32 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getImages, loadMoreImages } from "./galleryOperations";
 
 type ImageUrls = {
-  small: string
+  small: string,
+  regular: string
+}
+
+type Tag = {
+  title: string,
+}
+
+type User = {
+  first_name: string,
+  last_name: string,
+  profile_image: {
+    small: string,
+  }
 }
 
 export type GalleryItem = {
   id: string;
   alt_description: string;
+  description: string;
   downloads: number;
   likes: number;
   views: number;
-  tags: string[];
+  tags: Tag[];
   urls: ImageUrls;
+  user: User;
 }
 
 type Gallery = {

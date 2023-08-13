@@ -4,10 +4,22 @@ body {
   min-height: 100vh;
 }
 
-main {
-  min-height: 100vh;
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-ul {
-  list-style: none;
+img {
+  display: block;
+  max-width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }

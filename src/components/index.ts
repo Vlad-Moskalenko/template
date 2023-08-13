@@ -8,4 +8,5 @@ export {LoginForm} from './LoginForm/LoginForm';
 export {RegisterForm} from './RegisterForm/RegisterForm';
 export {List} from './List/List';
 export {Item} from './Item/Item'
+export {ItemDetails} from './ItemDetails/ItemDetails';
 export {App} from './App';
