@@ -9,4 +9,5 @@ export {RegisterForm} from './RegisterForm/RegisterForm';
 export {List} from './List/List';
 export {Item} from './Item/Item'
 export {ItemDetails} from './ItemDetails/ItemDetails';
+export {SearchForm} from './SearchForm/SearchForm';
 export {App} from './App';

@@ -3,7 +3,8 @@ import { galleryInstance } from "src/services/axiosConfig";
 
 type Args = {
   page: number,
-  tag: string
+  tag?: string,
+  query?: string
 }
 
 const getImages = createAsyncThunk('gallery/getImages', async (_, thunkApi) => {
@@ -26,7 +27,7 @@ const loadMoreImages = createAsyncThunk('gallery/loadMoreImages', async (page: n
 
 const getImagesByTag = createAsyncThunk('gallery/getImagesByTag', async (tag: string, thunkApi) => {
   try {
-    const resp = await galleryInstance.get('/search/collections', {params: {
+    const resp = await galleryInstance.get('/search/photos', {params: {
           query: tag
         }})
     return resp.data.results;
