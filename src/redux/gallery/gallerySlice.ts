@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getImages, loadMoreImages } from "./galleryOperations";
+import { getImages, getImagesByTag, loadMoreImages, loadMoreImagesByTag} from "./galleryOperations";
 
 type ImageUrls = {
   small: string,
@@ -28,6 +28,7 @@ export type GalleryItem = {
   tags: Tag[];
   urls: ImageUrls;
   user: User;
+  cover_photo?: GalleryItem
 }
 
 type Gallery = {
@@ -55,7 +56,17 @@ const gallerySlice = createSlice({
       state.isLoading = false;
       state.error = null;
     })
+    .addCase(getImagesByTag.fulfilled, (state, action: PayloadAction<GalleryItem[]>) => {
+      state.gallery = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    })
     .addCase(loadMoreImages.fulfilled, (state, action: PayloadAction<GalleryItem[]>) => {
+      state.gallery = [...state.gallery, ...action.payload];
+      state.isLoading = false;
+      state.error = null;
+    })
+    .addCase(loadMoreImagesByTag.fulfilled, (state, action: PayloadAction<GalleryItem[]>) => {
       state.gallery = [...state.gallery, ...action.payload];
       state.isLoading = false;
       state.error = null;

@@ -1,4 +1,5 @@
 export { default as HomePage } from './HomePage';
+export { default as HomeTagPage } from './HomeTagPage';
 export { default as ErrorPage } from './ErrorPage';
 export { default as DetailsPage } from './DetailsPage';
 export { default as LoginPage } from './LoginPage';

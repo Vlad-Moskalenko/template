@@ -6,7 +6,7 @@ type ItemProps = {
 };
 
 export const Item = ({ data }: ItemProps) => {
-  const { id, alt_description, urls } = data;
+  const { id, alt_description, urls } = data.cover_photo || data;
 
   return (
     <li>
