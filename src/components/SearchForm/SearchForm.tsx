@@ -2,15 +2,11 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { FcSearch } from 'react-icons/fc';
 
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { getImagesByTag } from 'src/redux/gallery/galleryOperations';
-
 import s from './SearchForm.module.css';
 
 export const SearchForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('query') || '');
-  const dispatch = useAppDispatch();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -19,8 +15,8 @@ export const SearchForm = () => {
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchParams({ query });
-    dispatch(getImagesByTag(query));
   };
+
   return (
     <form className={s.searchForm} onSubmit={handleSearchSubmit}>
       <input

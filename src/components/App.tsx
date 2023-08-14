@@ -5,17 +5,22 @@ import { useAuth } from 'src/hooks/useAuth';
 import { refresh } from 'src/redux/auth/authOperations';
 import { router } from 'src/routes';
 import { Spinner } from './Spinner/Spinner';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import { selectToken } from 'src/redux/auth/authSelectors';
 
 export const App = () => {
   const dispatch = useAppDispatch();
   const { isRefreshing } = useAuth();
+  const token = useAppSelector(selectToken);
 
   useEffect(() => {
-    dispatch(refresh());
-  }, [dispatch]);
+    if (token) {
+      dispatch(refresh());
+    }
+  }, [dispatch, token]);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <Spinner />
   ) : (
     <RouterProvider router={router} fallbackElement={<Spinner />} />
   );

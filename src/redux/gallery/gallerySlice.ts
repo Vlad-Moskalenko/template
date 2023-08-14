@@ -1,43 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getImages, getImagesByTag, loadMoreImages, loadMoreImagesByTag} from "./galleryOperations";
 
-type ImageUrls = {
-  small: string,
-  regular: string
-}
+import { getImages } from "./galleryOperations";
+import { GalleryItem } from "src/entities/GalleryItem";
 
-type Tag = {
-  title: string,
-}
-
-type User = {
-  first_name: string,
-  last_name: string,
-  profile_image: {
-    small: string,
-  }
-}
-
-export type GalleryItem = {
-  id: string;
-  alt_description: string;
-  description: string;
-  downloads: number;
-  likes: number;
-  views: number;
-  tags: Tag[];
-  urls: ImageUrls;
-  user: User;
-  cover_photo?: GalleryItem
-}
-
-type Gallery = {
-  gallery: GalleryItem[] | [],
+type State = {
+  gallery: GalleryItem[],
   isLoading: boolean;
   error: null | string;
 }
 
-const INITIAL_STATE: Gallery = {
+const INITIAL_STATE: State = {
   gallery: [],
   isLoading: false,
   error: null
@@ -48,25 +20,14 @@ const gallerySlice = createSlice({
 
   initialState: INITIAL_STATE,
 
-  reducers: {},
+  reducers: {
+    clearGallery(state) {
+      state.gallery = [];
+    }
+  },
 
   extraReducers: builder => builder
     .addCase(getImages.fulfilled, (state, action: PayloadAction<GalleryItem[]>) => {
-      state.gallery = action.payload;
-      state.isLoading = false;
-      state.error = null;
-    })
-    .addCase(getImagesByTag.fulfilled, (state, action: PayloadAction<GalleryItem[]>) => {
-      state.gallery = action.payload;
-      state.isLoading = false;
-      state.error = null;
-    })
-    .addCase(loadMoreImages.fulfilled, (state, action: PayloadAction<GalleryItem[]>) => {
-      state.gallery = [...state.gallery, ...action.payload];
-      state.isLoading = false;
-      state.error = null;
-    })
-    .addCase(loadMoreImagesByTag.fulfilled, (state, action: PayloadAction<GalleryItem[]>) => {
       state.gallery = [...state.gallery, ...action.payload];
       state.isLoading = false;
       state.error = null;
@@ -83,11 +44,12 @@ const gallerySlice = createSlice({
     .addMatcher(
       action =>
         action.type.startsWith('/gallery') && action.type.endsWith('/rejected'),
-      (state, action: PayloadAction<Gallery>) => {
+      (state, action: PayloadAction<State>) => {
         state.isLoading = false;
         state.error = action.payload.error;
       }
     )
 })
 
-export const galleryReducer = gallerySlice.reducer
+export const {clearGallery }= gallerySlice.actions;
+export const galleryReducer = gallerySlice.reducer;

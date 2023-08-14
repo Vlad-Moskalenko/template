@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { User } from './authSlice';
-import { authInstance } from '../../services/axiosConfig';
+
+import { authInstance } from 'src/services/axiosConfig';
+import { User } from "src/entities/User";
 
 interface RootState {
   auth: {

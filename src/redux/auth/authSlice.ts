@@ -3,11 +3,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import {login, register, refresh, logout} from './authOperations'
-
-export type User = {
-  name?: string | null,
-  email: string | null,
-}
+import { User } from "src/entities/User";
 
 export type AuthState = {
   user: User,
@@ -66,15 +62,15 @@ const authSlice = createSlice({
           state.isRefreshing = true;
         }
       )
-      .addMatcher(
-        action =>
-          action.type.startsWith('/auth') && action.type.endsWith('/rejected'),
-        state => {
-          state.user = initialState.user;
-          state.isLoggedIn = false;
-          state.isRefreshing = false;
-        }
-      )
+    .addMatcher(
+      action =>
+        action.type.startsWith('/auth') && action.type.endsWith('/rejected'),
+      state => {
+        state.user = initialState.user;
+        state.isLoggedIn = false;
+        state.isRefreshing = false;
+      }
+    )
 })
 
 const authPersistConfig = {

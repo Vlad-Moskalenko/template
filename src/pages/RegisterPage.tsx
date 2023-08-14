@@ -1,10 +1,18 @@
+import { NavLink } from 'react-router-dom';
+
 import { RegisterForm } from 'src/components';
 
 function RegisterPage() {
   return (
-    <main>
+    <>
       <RegisterForm />
-    </main>
+      <p>
+        Already have an account?
+        <NavLink to="/login">
+          <b>Login</b>
+        </NavLink>
+      </p>
+    </>
   );
 }
 

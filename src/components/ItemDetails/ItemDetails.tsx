@@ -11,7 +11,7 @@ export const ItemDetails = ({ itemData }: ItemProps) => {
   const { description, alt_description, downloads, likes, tags, urls, views, user } = itemData;
 
   return (
-    <main className={s.main}>
+    <>
       <div className={s.authorWrapper}>
         <img className={s.avatar} src={user.profile_image.small} alt="user profile image" />
         <p className={s.author}>{user.first_name + ' ' + user.last_name}</p>
@@ -42,6 +42,6 @@ export const ItemDetails = ({ itemData }: ItemProps) => {
           ))}
         </ul>
       </div>
-    </main>
+    </>
   );
 };

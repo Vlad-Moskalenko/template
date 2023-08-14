@@ -7,7 +7,6 @@ import { RestrictedRoute } from './RestrictedRoutes';
 import { Layout } from 'src/components';
 import {
   HomePage,
-  HomeTagPage,
   ErrorPage,
   DetailsPage,
   FavoritesPage,
@@ -27,7 +26,7 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.HOME_TAG,
-        element: <HomeTagPage />,
+        element: <HomePage />,
       },
       {
         path: ROUTES.DETAILS,

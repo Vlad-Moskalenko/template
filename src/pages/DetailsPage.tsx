@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { ItemDetails } from 'src/components';
 import { getImageDetails } from 'src/services/axiosConfig';
 
