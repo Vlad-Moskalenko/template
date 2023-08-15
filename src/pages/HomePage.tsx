@@ -1,44 +1,34 @@
-import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useParams, useSearchParams } from 'react-router-dom';
 
 import { List, Spinner } from 'src/components';
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useGallery } from 'src/hooks/useGallery';
-import { getImages } from 'src/redux/gallery/galleryOperations';
-import { clearGallery } from 'src/redux/gallery/gallerySlice';
 
 function HomePage() {
-  const { gallery } = useGallery();
-  const [page, setPage] = useState(1);
   const [searchParams] = useSearchParams('');
   const query = searchParams.get('query');
   const { tag } = useParams();
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(clearGallery());
-  }, [dispatch, tag, query]);
+  const { data, fetchNextPage, hasNextPage } = useGallery(query || tag);
 
-  useEffect(() => {
-    dispatch(getImages({ query: query || tag, page }));
-  }, [page, dispatch, query, tag]);
-
-  const loadMore = () => {
-    setPage(prevPage => prevPage + 1);
-  };
+  const fetchedGalleryCount = data?.pages.reduce((acc, page) => acc + page?.data.length, 0) || 0;
 
   return (
-    <>
+    data && (
       <InfiniteScroll
-        dataLength={gallery.length}
-        next={loadMore}
+        dataLength={fetchedGalleryCount}
+        next={fetchNextPage}
+        hasMore={!!hasNextPage}
         loader={<Spinner />}
-        hasMore={true}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
       >
-        <List list={gallery} />
+        <List list={data.pages.flatMap(page => page?.data)} />
       </InfiniteScroll>
-    </>
+    )
   );
 }
 

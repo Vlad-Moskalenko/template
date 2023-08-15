@@ -1,14 +1,23 @@
-import { useAppSelector } from './useAppSelector';
-import { selectGallery, selectIsLoading, selectError } from 'src/redux/gallery/gallerySelectors';
+import {
+  useInfiniteQuery
+} from '@tanstack/react-query'
 
-export const useGallery = () => {
-  const gallery = useAppSelector(selectGallery);
-  const isLoading = useAppSelector(selectIsLoading);
-  const error = useAppSelector(selectError);
+import { getImages, getImagesByQuery } from 'src/services/axiosConfig'
 
-  return {
-    gallery,
-    isLoading,
-    error,
-  };
-};
+
+export const useGallery = (query?: string) => {
+ return useInfiniteQuery({
+    queryKey: ['gallery', query],
+    queryFn: ({pageParam = 1}) => {
+      if(query) return getImagesByQuery({query, page: pageParam});
+      return getImages(pageParam)
+    },
+    getNextPageParam: (lastPage, allPages) => {
+      const maxPages = lastPage?.total/10
+      const nextPage = allPages.length + 1
+      return nextPage <= maxPages ? nextPage : undefined;
+    },
+    refetchOnMount: true,
+    staleTime: 24*60*60*1000
+  })
+}

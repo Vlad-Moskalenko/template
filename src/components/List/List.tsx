@@ -1,4 +1,4 @@
-import { GalleryItem } from 'src/redux/gallery/gallerySlice';
+import { GalleryItem } from 'src/entities/GalleryItem';
 import { Item } from '..';
 
 import s from './List.module.css';

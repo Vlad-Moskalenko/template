@@ -9,7 +9,7 @@ type Args = {
 const getImages = createAsyncThunk('gallery/loadMoreImages', async ({page, query}: Args, thunkApi) => {
   try {
     if(query) {
-      const resp = await galleryInstance.get('/search/collections', {params: {page, query}})
+      const resp = await galleryInstance.get('/search/photos', {params: {page, query}})
       return resp.data.results
     } else {
       const resp = await galleryInstance.get('/photos', {params: {page}})

@@ -1,4 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
+
 import {
   persistStore,
   FLUSH,
@@ -10,12 +11,10 @@ import {
 } from 'redux-persist';
 
 import { authReducer } from './auth/authSlice';
-import { galleryReducer } from './gallery/gallerySlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    gallery: galleryReducer
   },
 
   middleware: getDefaultMiddleware =>
@@ -23,7 +22,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    })
 })
 
 export const persistor = persistStore(store);
