@@ -1,7 +1,10 @@
-.list {
+.gallery {
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+
+  max-width: 1240px;
+
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  justify-items: center;
+  gap: 20px;
 }

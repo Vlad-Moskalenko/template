@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { GalleryItem } from 'src/entities/GalleryItem';
 import s from './ItemDetails.module.css';
-import { GalleryItem } from 'src/redux/gallery/gallerySlice';
 
 type ItemProps = {
   itemData: GalleryItem;

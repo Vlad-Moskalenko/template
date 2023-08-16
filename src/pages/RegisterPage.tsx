@@ -8,9 +8,7 @@ function RegisterPage() {
       <RegisterForm />
       <p>
         Already have an account?
-        <NavLink to="/login">
-          <b>Login</b>
-        </NavLink>
+        <NavLink to="/login">Login</NavLink>
       </p>
     </>
   );

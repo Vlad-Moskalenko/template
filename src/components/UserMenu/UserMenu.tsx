@@ -1,4 +1,5 @@
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
+import { FiLogOut } from 'react-icons/fi';
 
 import { logout } from 'src/redux/auth/authOperations';
 import { useAuth } from 'src/hooks/useAuth';
@@ -12,8 +13,8 @@ export const UserMenu = () => {
   return (
     <div className={s.wrapper}>
       <p className={s.username}>Welcome, {user.name}</p>
-      <button type="button" onClick={() => dispatch(logout())}>
-        Logout
+      <button className={s.logoutBtn} type="button" onClick={() => dispatch(logout())}>
+        <FiLogOut style={{ width: 25, height: 25 }} />
       </button>
     </div>
   );
