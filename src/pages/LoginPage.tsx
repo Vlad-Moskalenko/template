@@ -5,7 +5,7 @@ function LoginPage() {
   return (
     <>
       <LoginForm />
-      <p>
+      <p className="authMsg">
         Don’t have an account?
         <NavLink to="/register">
           <b>Join to us</b>

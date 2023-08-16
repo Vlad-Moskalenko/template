@@ -4,8 +4,20 @@
 }
 
 .label {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 5px;
   margin-bottom: 16px;
 }
+
+.inputErr {
+  border-color: red;
+}
+
+.authBtn {
+  margin-top: 30px;
+  display: block;
+  width: 100%;
+}
+

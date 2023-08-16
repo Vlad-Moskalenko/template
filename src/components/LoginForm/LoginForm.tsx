@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
 
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { login } from 'src/redux/auth/authOperations';
+import { LoginSchema } from './loginSchema';
 
 import s from './LoginForm.module.css';
 
@@ -11,33 +13,58 @@ const INITIAL_STATE = {
 };
 
 export const LoginForm = () => {
-  const [user, setUser] = useState(INITIAL_STATE);
   const dispatch = useAppDispatch();
+  const formik = useFormik({
+    initialValues: INITIAL_STATE,
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target;
-    setUser(prevState => ({ ...prevState, [input.name]: input.value }));
-  };
+    validationSchema: LoginSchema,
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(login(user));
-    setUser(INITIAL_STATE);
-  };
+    onSubmit: (values, actions) => {
+      dispatch(login(values)).then((resp: any) =>
+        resp?.error ? toast.error(resp.error.message) : actions.resetForm()
+      );
+    },
+  });
 
-  const { email, password } = user;
+  const {
+    values: { email, password },
+    isSubmitting,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = formik;
 
   return (
     <form className={s.form} onSubmit={handleSubmit} autoComplete="off">
       <label className={s.label}>
         Email
-        <input type="email" name="email" value={email} onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          autoComplete="email"
+          value={email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {errors.email && touched.email && <p className="errorMsg">{errors.email}</p>}
       </label>
       <label className={s.label}>
         Password
-        <input type="password" name="password" value={password} onChange={handleChange} />
+        <input
+          type="password"
+          name="password"
+          autoComplete="password"
+          value={password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {errors.password && touched.password && <p className="errorMsg">{errors.password}</p>}
       </label>
-      <button type="submit">Log In</button>
+      <button className={s.authBtn} type="submit">
+        Login
+      </button>
     </form>
   );
 };

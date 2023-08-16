@@ -6,9 +6,11 @@ function RegisterPage() {
   return (
     <>
       <RegisterForm />
-      <p>
+      <p className="authMsg">
         Already have an account?
-        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/login">
+          <b>Login</b>
+        </NavLink>
       </p>
     </>
   );

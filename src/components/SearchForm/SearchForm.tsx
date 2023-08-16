@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { FcSearch } from 'react-icons/fc';
+import { BsSearch } from 'react-icons/bs';
 
 import s from './SearchForm.module.css';
 
@@ -30,7 +30,7 @@ export const SearchForm = () => {
         onChange={handleSearchChange}
       />
       <button type="submit" className={s.searchFormButton}>
-        <FcSearch style={{ width: 30, height: 30 }} />
+        <BsSearch style={{ width: 25, height: 25 }} />
       </button>
     </form>
   );
